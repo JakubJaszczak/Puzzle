@@ -1,0 +1,9 @@
+D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/Puzzle_Jakub_Jaszczak.dir
+D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/install.dir
+D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/Puzzle_Jakub_Jaszczak_autogen_timestamp_deps.dir
+D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/Puzzle_Jakub_Jaszczak_autogen.dir
