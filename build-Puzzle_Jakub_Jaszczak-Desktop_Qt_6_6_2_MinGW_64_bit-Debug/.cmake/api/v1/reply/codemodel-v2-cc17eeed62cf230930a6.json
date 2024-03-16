@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-5c095991c3fef1a66b93.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Puzzle_Jakub_Jaszczak",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Puzzle_Jakub_Jaszczak::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Puzzle_Jakub_Jaszczak-Debug-cbded42249c0f9965411.json",
+					"name" : "Puzzle_Jakub_Jaszczak",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Puzzle_Jakub_Jaszczak_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Puzzle_Jakub_Jaszczak_autogen-Debug-8deeb413bf175f0f5dbf.json",
+					"name" : "Puzzle_Jakub_Jaszczak_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Puzzle_Jakub_Jaszczak_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Puzzle_Jakub_Jaszczak_autogen_timestamp_deps-Debug-9c34fc7df554ab1b8c99.json",
+					"name" : "Puzzle_Jakub_Jaszczak_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug",
+		"source" : "D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
