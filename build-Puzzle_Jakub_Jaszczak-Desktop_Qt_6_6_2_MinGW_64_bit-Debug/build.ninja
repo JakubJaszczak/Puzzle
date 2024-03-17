@@ -73,9 +73,9 @@ build CMakeFiles/Puzzle_Jakub_Jaszczak.dir/mainwindow.cpp.obj: CXX_COMPILER__Puz
   OBJECT_DIR = CMakeFiles\Puzzle_Jakub_Jaszczak.dir
   OBJECT_FILE_DIR = CMakeFiles\Puzzle_Jakub_Jaszczak.dir
 
-build CMakeFiles/Puzzle_Jakub_Jaszczak.dir/gamemenager.cpp.obj: CXX_COMPILER__Puzzle_Jakub_Jaszczak_unscanned_Debug D$:/Studia/Magisterskie/Zaawansowany$ C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/gamemenager.cpp || cmake_object_order_depends_target_Puzzle_Jakub_Jaszczak
+build CMakeFiles/Puzzle_Jakub_Jaszczak.dir/gamemanager.cpp.obj: CXX_COMPILER__Puzzle_Jakub_Jaszczak_unscanned_Debug D$:/Studia/Magisterskie/Zaawansowany$ C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/gamemanager.cpp || cmake_object_order_depends_target_Puzzle_Jakub_Jaszczak
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
-  DEP_FILE = CMakeFiles\Puzzle_Jakub_Jaszczak.dir\gamemenager.cpp.obj.d
+  DEP_FILE = CMakeFiles\Puzzle_Jakub_Jaszczak.dir\gamemanager.cpp.obj.d
   FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -I"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/build-Puzzle_Jakub_Jaszczak-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/Puzzle_Jakub_Jaszczak_autogen/include" -isystem C:/Qt/6.6.2/mingw_64/include/QtCore -isystem C:/Qt/6.6.2/mingw_64/include -isystem C:/Qt/6.6.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.6.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.6.2/mingw_64/include/QtGui
   OBJECT_DIR = CMakeFiles\Puzzle_Jakub_Jaszczak.dir
@@ -89,7 +89,7 @@ build CMakeFiles/Puzzle_Jakub_Jaszczak.dir/gamemenager.cpp.obj: CXX_COMPILER__Pu
 #############################################
 # Link the executable Puzzle_Jakub_Jaszczak.exe
 
-build Puzzle_Jakub_Jaszczak.exe: CXX_EXECUTABLE_LINKER__Puzzle_Jakub_Jaszczak_Debug CMakeFiles/Puzzle_Jakub_Jaszczak.dir/Puzzle_Jakub_Jaszczak_autogen/mocs_compilation.cpp.obj CMakeFiles/Puzzle_Jakub_Jaszczak.dir/main.cpp.obj CMakeFiles/Puzzle_Jakub_Jaszczak.dir/mainwindow.cpp.obj CMakeFiles/Puzzle_Jakub_Jaszczak.dir/gamemenager.cpp.obj | C$:/Qt/6.6.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.6.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.6.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.6.2/mingw_64/lib/libQt6EntryPoint.a || Puzzle_Jakub_Jaszczak_autogen Puzzle_Jakub_Jaszczak_autogen_timestamp_deps
+build Puzzle_Jakub_Jaszczak.exe: CXX_EXECUTABLE_LINKER__Puzzle_Jakub_Jaszczak_Debug CMakeFiles/Puzzle_Jakub_Jaszczak.dir/Puzzle_Jakub_Jaszczak_autogen/mocs_compilation.cpp.obj CMakeFiles/Puzzle_Jakub_Jaszczak.dir/main.cpp.obj CMakeFiles/Puzzle_Jakub_Jaszczak.dir/mainwindow.cpp.obj CMakeFiles/Puzzle_Jakub_Jaszczak.dir/gamemanager.cpp.obj | C$:/Qt/6.6.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.6.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.6.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.6.2/mingw_64/lib/libQt6EntryPoint.a || Puzzle_Jakub_Jaszczak_autogen Puzzle_Jakub_Jaszczak_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.6.2/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.6.2/mingw_64/lib/libQt6Gui.a  C:/Qt/6.6.2/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.6.2/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -192,7 +192,7 @@ build Puzzle_Jakub_Jaszczak_autogen/timestamp Puzzle_Jakub_Jaszczak_autogen/mocs
 #############################################
 # Phony custom command for CMakeFiles\Puzzle_Jakub_Jaszczak_autogen_timestamp_deps
 
-build CMakeFiles/Puzzle_Jakub_Jaszczak_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/Puzzle_Jakub_Jaszczak_autogen_timestamp_deps: phony C$:/Qt/6.6.2/mingw_64/./bin/moc.exe C$:/Qt/6.6.2/mingw_64/./bin/uic.exe C$:/Qt/6.6.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.6.2/mingw_64/lib/libQt6Core.a
+build CMakeFiles/Puzzle_Jakub_Jaszczak_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/Puzzle_Jakub_Jaszczak_autogen_timestamp_deps: phony C$:/Qt/6.6.2/mingw_64/./bin/uic.exe C$:/Qt/6.6.2/mingw_64/./bin/moc.exe C$:/Qt/6.6.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.6.2/mingw_64/lib/libQt6Widgets.a
 
 
 #############################################

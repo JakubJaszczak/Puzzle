@@ -255,9 +255,9 @@
 	"HEADERS" : 
 	[
 		[
-			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/gamemenager.h",
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/gamemanager.h",
 			"MU",
-			"EWIEGA46WW/moc_gamemenager.cpp",
+			"EWIEGA46WW/moc_gamemanager.cpp",
 			null
 		],
 		[
@@ -338,7 +338,7 @@
 	"SOURCES" : 
 	[
 		[
-			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/gamemenager.cpp",
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/gamemanager.cpp",
 			"MU",
 			null
 		],
