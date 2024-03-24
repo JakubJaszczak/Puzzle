@@ -26,5 +26,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     GameManager* mManager;
+    void createGridLayout();
 };
 #endif // MAINWINDOW_H

@@ -30,8 +30,10 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *numberOfCells_label;
     QSpinBox *sB_numberOfCells;
-    QLabel *logger;
     QPushButton *pushButton;
+    QPushButton *pushButton_2;
+    QLabel *l_logger_label;
+    QLabel *l_logger;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -44,7 +46,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         verticalLayoutWidget = new QWidget(centralwidget);
         verticalLayoutWidget->setObjectName("verticalLayoutWidget");
-        verticalLayoutWidget->setGeometry(QRect(610, 30, 160, 81));
+        verticalLayoutWidget->setGeometry(QRect(610, 30, 160, 201));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(10, 0, 10, 0);
@@ -61,12 +63,26 @@ public:
 
         verticalLayout->addWidget(sB_numberOfCells);
 
-        logger = new QLabel(centralwidget);
-        logger->setObjectName("logger");
-        logger->setGeometry(QRect(610, 160, 161, 261));
-        pushButton = new QPushButton(centralwidget);
+        pushButton = new QPushButton(verticalLayoutWidget);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(650, 130, 80, 18));
+
+        verticalLayout->addWidget(pushButton);
+
+        pushButton_2 = new QPushButton(verticalLayoutWidget);
+        pushButton_2->setObjectName("pushButton_2");
+
+        verticalLayout->addWidget(pushButton_2);
+
+        l_logger_label = new QLabel(verticalLayoutWidget);
+        l_logger_label->setObjectName("l_logger_label");
+
+        verticalLayout->addWidget(l_logger_label);
+
+        l_logger = new QLabel(verticalLayoutWidget);
+        l_logger->setObjectName("l_logger");
+
+        verticalLayout->addWidget(l_logger);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -85,8 +101,10 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         numberOfCells_label->setText(QCoreApplication::translate("MainWindow", "Number of cells: n", nullptr));
-        logger->setText(QCoreApplication::translate("MainWindow", "Logger:", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Restart", nullptr));
+        l_logger_label->setText(QCoreApplication::translate("MainWindow", "Logger:", nullptr));
+        l_logger->setText(QString());
     } // retranslateUi
 
 };

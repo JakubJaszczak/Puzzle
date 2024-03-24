@@ -25,6 +25,12 @@ void MainWindow::on_pushButton_clicked()
     int sb_value = ui->sB_numberOfCells->value();
     this->mManager->setNumberOfCells(sb_value);
     QString s = QString::number(sb_value);
-    ui->logger->setText(s);
+    ui->l_logger->setText(s);
+}
+
+void MainWindow::createGridLayout()
+{
+    QGridLayout *layout = new QGridLayout;
+
 }
 

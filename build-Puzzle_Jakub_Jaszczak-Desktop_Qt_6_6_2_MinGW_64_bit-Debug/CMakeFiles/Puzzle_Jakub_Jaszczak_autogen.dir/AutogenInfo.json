@@ -255,15 +255,45 @@
 	"HEADERS" : 
 	[
 		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/basictile.h",
+			"MU",
+			"EWIEGA46WW/moc_basictile.cpp",
+			null
+		],
+		[
 			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/gamemanager.h",
 			"MU",
 			"EWIEGA46WW/moc_gamemanager.cpp",
 			null
 		],
 		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/imageprocessor.h",
+			"MU",
+			"EWIEGA46WW/moc_imageprocessor.cpp",
+			null
+		],
+		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/imagetile.h",
+			"MU",
+			"EWIEGA46WW/moc_imagetile.cpp",
+			null
+		],
+		[
 			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
+			null
+		],
+		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/numbertile.h",
+			"MU",
+			"EWIEGA46WW/moc_numbertile.cpp",
+			null
+		],
+		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/tile.h",
+			"MU",
+			"EWIEGA46WW/moc_tile.cpp",
 			null
 		]
 	],
@@ -338,7 +368,22 @@
 	"SOURCES" : 
 	[
 		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/basictile.cpp",
+			"MU",
+			null
+		],
+		[
 			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/gamemanager.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/imageprocessor.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/imagetile.cpp",
 			"MU",
 			null
 		],
@@ -349,6 +394,16 @@
 		],
 		[
 			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/mainwindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/numbertile.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Studia/Magisterskie/Zaawansowany C++/projekt/Puzzle/Puzzle_Jakub_Jaszczak/tile.cpp",
 			"MU",
 			null
 		]
