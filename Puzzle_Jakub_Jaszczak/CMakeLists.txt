@@ -26,10 +26,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         gamemanager.h gamemanager.cpp
         resources/Lena.png resources/Mario.png
         imageprocessor.h imageprocessor.cpp
-        tile.h tile.cpp
-        basictile.h basictile.cpp
-        imagetile.h imagetile.cpp
-        numbertile.h numbertile.cpp
+
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Puzzle_Jakub_Jaszczak APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

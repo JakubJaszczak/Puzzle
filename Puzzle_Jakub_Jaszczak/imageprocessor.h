@@ -10,10 +10,10 @@ class ImageProcessor
 {
 public:
     ImageProcessor(QString filename);
-    QIcon createButtonIcon(QPixmap &_image);
 private:
     QPixmap _image;
-    QPixmap cropImage(int x,int y, int width, int height);
+    QPixmap cropImage(int _number_of_tiles);
+    QIcon createButtonIcon(int _number_of_tiles);
 };
 
 #endif // IMAGEPROCESSOR_H
