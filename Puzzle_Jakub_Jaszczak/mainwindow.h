@@ -21,11 +21,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_start_pushButton_clicked();
+    void on_pB_start_clicked();
 
 private:
     Ui::MainWindow *ui;
     GameManager* mManager;
-    void createGridLayout();
+    void createGridLayout(int n);
 };
 #endif // MAINWINDOW_H
