@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1300</width>
+    <height>1100</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>610</x>
+      <x>1100</x>
       <y>30</y>
       <width>160</width>
-      <height>201</height>
+      <height>421</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -32,6 +32,9 @@
      </property>
      <item>
       <widget class="QLabel" name="numberOfCells_label">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="text">
         <string>Number of cells: n</string>
        </property>
@@ -47,6 +50,13 @@
        </property>
        <property name="maximum">
         <number>9</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="image">
+       <property name="suffix">
+        <string/>
        </property>
       </widget>
      </item>
@@ -85,8 +95,8 @@
      <rect>
       <x>30</x>
       <y>30</y>
-      <width>541</width>
-      <height>421</height>
+      <width>1024</width>
+      <height>1024</height>
      </rect>
     </property>
    </widget>
@@ -96,7 +106,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1300</width>
      <height>18</height>
     </rect>
    </property>

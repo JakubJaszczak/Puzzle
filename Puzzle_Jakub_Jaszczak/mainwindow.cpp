@@ -26,14 +26,13 @@ void MainWindow::on_pB_start_clicked()
     int sb_value = ui->sB_numberOfCells->value();
     this->mManager->setNumberOfCells(sb_value);
     this->createGridLayout(sb_value);
-
     // Logging number of cells to be removed
     QString s = QString::number(sb_value);
     ui->l_logger->setText(s);
 }
 
 void MainWindow::createGridLayout(int n)
-{  /* ImageProcessor imageProccessor = ImageProcessor("./../resources/Lena.png", n);
+{  /* ImageProcessor imageProccessor = ImageProcessor("./../resources/Mario.png", n);
     QGridLayout *layout = new QGridLayout(ui->board_frame);
     for (int row=0; row < n; row++)
     {
@@ -48,16 +47,26 @@ void MainWindow::createGridLayout(int n)
     };
     ui->board_frame->setLayout(layout);*/
 
-    ImageProcessor imageProccessor = ImageProcessor("./../resources/Lena.png", n);
+    ImageProcessor imageProccessor = ImageProcessor(Images::Lena, n);
+    QSize buttonSize = imageProccessor.getButtonSize();
 
     QGridLayout *layout = new QGridLayout;
     for (int row = 0; row < n; ++row) {
         for (int col = 0; col < n; ++col) {
-            QPushButton *button = new QPushButton(QString("Button %1").arg(row * 3 + col + 1));
-            button->setFixedSize(50,50);
+            QPushButton *button = new QPushButton();
+            QIcon buttonIcon = imageProccessor.getIcon(row, col);
+            button->setIcon(buttonIcon);
+            button->setFixedSize(buttonSize);
+            button->setIconSize(buttonSize);
             layout->addWidget(button, row, col);
         }
     }
     ui->board->setLayout(layout);
+}
+
+
+void MainWindow::on_pB_restart_clicked()
+{
+    int x=0;
 }
 

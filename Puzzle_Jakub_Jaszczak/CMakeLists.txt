@@ -26,6 +26,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         gamemanager.h gamemanager.cpp
         resources/Lena.png resources/Mario.png
         imageprocessor.h imageprocessor.cpp
+        resources.qrc
 
 
 
