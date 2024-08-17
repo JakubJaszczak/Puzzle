@@ -27,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         resources/Lena.png resources/Mario.png
         imageprocessor.h imageprocessor.cpp
         resources.qrc
+        board.h board.cpp
 
 
 

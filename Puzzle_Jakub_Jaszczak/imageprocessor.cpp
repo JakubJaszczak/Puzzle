@@ -23,9 +23,9 @@ QIcon ImageProcessor::createButtonIcon(int _row, int _col)
 }
 
 QPixmap ImageProcessor::cropImage(int _row, int _col)
-{   int width = this->_image.width();
-    int height = this ->_image.height();
-    QRect cropRect = QRect(_row*width,_col*height,this->buttonSize.width(), this->buttonSize.height());
+{   /*int width = this->_image.width();
+    int height = this ->_image.height();*/
+    QRect cropRect = QRect(_col*this->buttonSize.width(),_row*this->buttonSize.width(),this->buttonSize.width() -5, this->buttonSize.height()-5);
     return this->_image.copy(cropRect);
 }
 

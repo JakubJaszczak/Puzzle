@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <qpushbutton.h>
 #include "gamemanager.h"
 
 
@@ -26,9 +27,14 @@ private slots:
 
     void on_pB_restart_clicked();
 
+    void on_sB_numberOfCells_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     GameManager* mManager;
+    std::vector<std::vector<QPushButton*>> boardButtons;
+
     void createGridLayout(int n);
+    void delete_board_layout();
 };
 #endif // MAINWINDOW_H

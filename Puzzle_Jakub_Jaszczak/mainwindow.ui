@@ -36,7 +36,7 @@
         <bool>true</bool>
        </property>
        <property name="text">
-        <string>Number of cells: n</string>
+        <string>Number of cells: </string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -50,13 +50,6 @@
        </property>
        <property name="maximum">
         <number>9</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSpinBox" name="image">
-       <property name="suffix">
-        <string/>
        </property>
       </widget>
      </item>
@@ -93,11 +86,14 @@
    <widget class="QWidget" name="board" native="true">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>30</y>
       <width>1024</width>
       <height>1024</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
    </widget>
   </widget>
