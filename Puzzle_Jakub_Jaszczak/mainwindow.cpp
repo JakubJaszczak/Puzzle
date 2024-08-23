@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    // this->createGridLayout(ui->sB_numberOfCells->value());
+    ui->comboBox->addItem(QString("Lena"));
+    ui->comboBox->addItem(QString("Mario"));
 }
 
 void MainWindow::setManager(GameManager &manager)
@@ -28,6 +29,8 @@ void MainWindow::on_pB_start_clicked()
     int sb_value = ui->sB_numberOfCells->value();
     this->mManager->setNumberOfCells(sb_value);
     this->createGridLayout(sb_value);
+    Board board;
+    board.setboard(this->boardButtons);
 
     // Logging number of cells to be removed
     QString s = QString::number(sb_value);
@@ -49,28 +52,33 @@ void MainWindow::createGridLayout(int n)
             this->boardButtons[row][col]->setIconSize(buttonSize);
             this->boardButtons[row][col]->setIcon(icon);
             layout->addWidget(this->boardButtons[row][col], row, col);
+
+            connect(this->boardButtons[row][col], &QPushButton::clicked, this, &MainWindow::handleButtonClick);
         }
     }
+
+    QPushButton *blackButton = this->boardButtons[n-1][n-1];
+    blackButton->setIcon(QIcon());
+    QPalette pal = blackButton->palette();
+    pal.setColor(QPalette::Button, QColor(Qt::black));
+    blackButton->setAutoFillBackground(true);
+    blackButton->setPalette(pal);
+    blackButton->update();
+
+
     ui->board->setLayout(layout);
 }
 
 void MainWindow::delete_board_layout(){
 
-    for (std::size_t i = 0; i < this->boardButtons.size(); ++i) {
-        for (std::size_t j = 0; j < this->boardButtons[i].size(); ++j) {
-            delete this->boardButtons[i][j];
-        }
-    }
-    // qDeleteAll(ui->board->findChildren<QPushButton *>(Qt::FindDirectChildrenOnly));
-
-    if (ui->board->layout() != nullptr){
-        delete ui->board->layout();
-    }
+    QLayout* layout = ui->board->layout();
+    qDeleteAll(ui->board->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
+    delete layout;
 }
 
 void MainWindow::on_pB_restart_clicked()
 {
-    int x=0;
+    delete_board_layout();
 }
 
 
@@ -78,5 +86,25 @@ void MainWindow::on_sB_numberOfCells_valueChanged(int arg1)
 {
     // delete_board_layout();
     // createGridLayout(arg1);
+}
+
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    ui->l_logger->setText(QString::number(index));
+}
+
+
+void MainWindow::handleButtonClick(){
+
+    QPushButton *clickedButton = qobject_cast<QPushButton*>(sender());
+    if (clickedButton) {
+        QGridLayout *layout = qobject_cast<QGridLayout*>(ui->board->layout());
+        int row, column, rowSpan, columnSpan;
+        layout->getItemPosition(layout->indexOf(clickedButton), &column, &row, &rowSpan, &columnSpan);
+
+        // DEBUG- REMOVE LATER !
+        qDebug() << "Button clicked at row:" << row << "column:" << column << "idx: " << layout->indexOf(clickedButton);
+    }
 }
 

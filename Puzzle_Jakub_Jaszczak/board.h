@@ -6,14 +6,13 @@
 class Board
 {
 public:
-    Board(int _number_of_tiles,QSize buttonSize);
-/*    std::vector<std::vector<QPushButton*>> getBoard();
-    void setButton(int row, int col, QPushButton *button, QIcon buttonIcon);
+    Board();
+    std::vector<std::vector<QPushButton*>> getBoard();
+    void setboard(std::vector<std::vector<QPushButton*>> baord);
     ~Board();
 
 private:
-    QSize tileSize*/;
-
+    std::vector<std::vector<QPushButton*>> board;
 };
 
 #endif // BOARD_H

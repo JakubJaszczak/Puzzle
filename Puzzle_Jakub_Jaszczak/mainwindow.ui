@@ -68,6 +68,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QComboBox" name="comboBox">
+       <property name="currentText">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="l_logger_label">
        <property name="text">
         <string>Logger:</string>

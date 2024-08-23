@@ -29,6 +29,10 @@ private slots:
 
     void on_sB_numberOfCells_valueChanged(int arg1);
 
+    void on_comboBox_currentIndexChanged(int index);
+
+    void handleButtonClick();
+
 private:
     Ui::MainWindow *ui;
     GameManager* mManager;
