@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include <qpushbutton.h>
+#include "board.h"
 #include "gamemanager.h"
+#include "imageprocessor.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -37,7 +39,8 @@ private:
     Ui::MainWindow *ui;
     GameManager* mManager;
     std::vector<std::vector<QPushButton*>> boardButtons;
-
+    Board* board;
+    Images currentImage;
     void createGridLayout(int n);
     void delete_board_layout();
 };

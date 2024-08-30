@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "board.h"
-#include "imageprocessor.h"
+#include "player.h"
 
 #include <Qstring>
 
@@ -10,8 +9,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->comboBox->addItem(QString("Lena"));
+
     ui->comboBox->addItem(QString("Mario"));
+    ui->comboBox->addItem(QString("Lena"));
+    this->currentImage = Images::Mario;
 }
 
 void MainWindow::setManager(GameManager &manager)
@@ -21,16 +22,19 @@ void MainWindow::setManager(GameManager &manager)
 
 MainWindow::~MainWindow()
 {
+    delete board;
     delete ui;
 }
 
 void MainWindow::on_pB_start_clicked()
 {
     int sb_value = ui->sB_numberOfCells->value();
-    this->mManager->setNumberOfCells(sb_value);
+
+    // this->mManager->setNumberOfCells(sb_value);
     this->createGridLayout(sb_value);
-    Board board;
-    board.setboard(this->boardButtons);
+
+    Board *board = new Board(this->boardButtons);
+    this->board = board;
 
     // Logging number of cells to be removed
     QString s = QString::number(sb_value);
@@ -39,10 +43,11 @@ void MainWindow::on_pB_start_clicked()
 
 void MainWindow::createGridLayout(int n)
 {
-    ImageProcessor imageProccessor = ImageProcessor(Images::Mario, n);
+    ImageProcessor imageProccessor = ImageProcessor(this->currentImage, n);
     QSize buttonSize = QSize(ui->board->frameSize().width()/n,ui->board->frameSize().width()/n);
-    // Board board(n, buttonSize);
+
     this->boardButtons.resize(n, std::vector<QPushButton*>(n, nullptr));
+
     QGridLayout *layout = new QGridLayout;
     for (int row = 0; row < n; ++row) {
         for (int col = 0; col < n; ++col) {
@@ -52,27 +57,16 @@ void MainWindow::createGridLayout(int n)
             this->boardButtons[row][col]->setIconSize(buttonSize);
             this->boardButtons[row][col]->setIcon(icon);
             layout->addWidget(this->boardButtons[row][col], row, col);
-
             connect(this->boardButtons[row][col], &QPushButton::clicked, this, &MainWindow::handleButtonClick);
         }
     }
-
-    QPushButton *blackButton = this->boardButtons[n-1][n-1];
-    blackButton->setIcon(QIcon());
-    QPalette pal = blackButton->palette();
-    pal.setColor(QPalette::Button, QColor(Qt::black));
-    blackButton->setAutoFillBackground(true);
-    blackButton->setPalette(pal);
-    blackButton->update();
-
-
     ui->board->setLayout(layout);
 }
 
 void MainWindow::delete_board_layout(){
 
-    QLayout* layout = ui->board->layout();
-    qDeleteAll(ui->board->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
+    qDeleteAll(this->ui->board->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
+    QGridLayout *layout = qobject_cast<QGridLayout*>(ui->board->layout());
     delete layout;
 }
 
@@ -91,7 +85,8 @@ void MainWindow::on_sB_numberOfCells_valueChanged(int arg1)
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
-    ui->l_logger->setText(QString::number(index));
+    if (index == 0){this->currentImage = Images::Mario;};
+    if (index == 1){this->currentImage = Images::Lena;};
 }
 
 
@@ -100,11 +95,12 @@ void MainWindow::handleButtonClick(){
     QPushButton *clickedButton = qobject_cast<QPushButton*>(sender());
     if (clickedButton) {
         QGridLayout *layout = qobject_cast<QGridLayout*>(ui->board->layout());
-        int row, column, rowSpan, columnSpan;
-        layout->getItemPosition(layout->indexOf(clickedButton), &column, &row, &rowSpan, &columnSpan);
-
+        int clickedIndex = layout->indexOf(clickedButton);
+        Player player;
+        player.move(this->board, clickedIndex);
         // DEBUG- REMOVE LATER !
-        qDebug() << "Button clicked at row:" << row << "column:" << column << "idx: " << layout->indexOf(clickedButton);
+        // qDebug() << "Button clicked at idx: " << layout->indexOf(clickedButton);
     }
+
 }
 

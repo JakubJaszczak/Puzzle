@@ -8,9 +8,24 @@ ImageProcessor::ImageProcessor(Images image, int _number_of_tiles) {
     QPixmap fullImage(this->imagesFilePaths[image]);
     this->_image = fullImage;
     this->setButtonSize(_number_of_tiles);
+
+    this->boardIcons.resize(_number_of_tiles);
+    for (int row = 0; row<_number_of_tiles; ++row) {
+        this->boardIcons[row].resize(_number_of_tiles);
+        for (int col = 0; col<_number_of_tiles; ++col) {
+            QIcon icon = createButtonIcon(row, col);
+            this->boardIcons[row][col] = icon;
+        }
+    }
 }
 
-QIcon ImageProcessor::getIcon(int _row, int _col){return this->createButtonIcon(_row, _col);}
+QIcon ImageProcessor::getIcon(int _row, int _col){return this->boardIcons[_row][_col];}
+QIcon ImageProcessor::getIcon(int idx){
+    int col = idx % this->_number_of_tiles;
+    int row = idx / this->_number_of_tiles;
+    return this->boardIcons[row][col];
+}
+
 
 QSize ImageProcessor::getButtonSize(){return this->buttonSize;}
 

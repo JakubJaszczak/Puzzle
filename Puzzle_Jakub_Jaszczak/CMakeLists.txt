@@ -28,6 +28,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         imageprocessor.h imageprocessor.cpp
         resources.qrc
         board.h board.cpp
+        player.h player.cpp
+        engine.h engine.cpp
+
 
 
 
