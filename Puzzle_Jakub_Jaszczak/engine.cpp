@@ -58,3 +58,21 @@ bool Engine::checkWinCondition() {
     };
     return true;
 }
+
+void Engine::shuffle(Board *board, int n)
+{ for (int i=0; i<n; i++)
+    {   int blackButtonIdx = board->getCurrentBlackButtonIdx();
+        int numberOfTiles = board->getNumberOfTiles();
+        std::vector<int> possibleIndecies{blackButtonIdx+1, blackButtonIdx-1, blackButtonIdx+numberOfTiles,blackButtonIdx-numberOfTiles};
+        for (int x: possibleIndecies){
+            if (x > pow(numberOfTiles,2)-1 || x<0){
+                std::vector<int>::iterator position = std::find(possibleIndecies.begin(), possibleIndecies.end(), x);
+                possibleIndecies.erase(position);
+            }
+        }
+        int clickedIndex = possibleIndecies[rand() % possibleIndecies.size()] ;
+        this->processMove(board,clickedIndex);
+    }
+}
+
+

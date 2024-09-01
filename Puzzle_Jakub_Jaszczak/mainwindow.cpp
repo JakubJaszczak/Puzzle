@@ -40,6 +40,7 @@ void MainWindow::on_pB_start_clicked()
     this->engine = gameEngine;
     this->engine->setInitialBoardState(board->getNumberOfTiles());
     this->engine->addPlayer(player);
+    this->engine->shuffle(board, 20);
     this->board = board;
 
     // Logging number of cells to be removed

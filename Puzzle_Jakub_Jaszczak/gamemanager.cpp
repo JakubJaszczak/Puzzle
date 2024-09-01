@@ -13,5 +13,3 @@ int GameManager::getNumberOfCells() const
 {
     return numberOfCells;
 }
-
-

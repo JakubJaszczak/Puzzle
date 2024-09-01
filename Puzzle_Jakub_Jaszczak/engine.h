@@ -11,6 +11,8 @@ public:
     void addPlayer(Player *player);
     void processMove(Board *board, int clickedIdx);
     void setInitialBoardState(int number_of_tiles);
+    void shuffle(Board *board, int n);
+
 
 private:
     Player player; // One player game
