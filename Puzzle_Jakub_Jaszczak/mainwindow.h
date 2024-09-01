@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <qpushbutton.h>
 #include "board.h"
+#include "engine.h"
 #include "gamemanager.h"
 #include "imageprocessor.h"
 
@@ -40,6 +41,7 @@ private:
     GameManager* mManager;
     std::vector<std::vector<QPushButton*>> boardButtons;
     Board* board;
+    Engine *engine;
     Images currentImage;
     void createGridLayout(int n);
     void delete_board_layout();

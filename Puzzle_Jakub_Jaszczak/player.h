@@ -11,8 +11,8 @@ public:
     void move(Board* board, int clickedIndex);
 
 private:
-    bool isMoveLegal(int clickedIndex, int currentEmptyTileIdx, int numberbOfTilesPerAsix);
-    bool test(int a, int b, int c){return true;};
+    bool gameWon();
+    int moveCount = 0;
 };
 
 #endif // PLAYER_H

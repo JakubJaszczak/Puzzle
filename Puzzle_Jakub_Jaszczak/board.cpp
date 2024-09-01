@@ -1,7 +1,7 @@
 #include "board.h"
 
-Board::Board(std::vector<std::vector<QPushButton*>> buttonsArr)
-{
+Board::Board(std::vector<std::vector<QPushButton*>> buttonsArr, ImageProcessor *imageProcessor)
+{   this->imageProcessor = imageProcessor;
     this->board = buttonsArr;
     this->number_of_tiles = this->board.size();
     this->currentBlackButtonIdx = pow(this->number_of_tiles, 2) -1;
@@ -55,6 +55,11 @@ int Board::getCurrentBlackButtonIdx()
 int Board::getNumberOfTiles()
 {
     return this->board.size();
+}
+
+ImageProcessor Board::getImageProcessor()
+{
+    return *this->imageProcessor;
 }
 
 void Board::setCurrentBlackButtonIdx(int idx)

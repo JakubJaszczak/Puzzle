@@ -32,8 +32,14 @@ void MainWindow::on_pB_start_clicked()
 
     // this->mManager->setNumberOfCells(sb_value);
     this->createGridLayout(sb_value);
+    ImageProcessor *imageProccessor = new ImageProcessor(this->currentImage, sb_value);
+    Board *board = new Board(this->boardButtons, imageProccessor);
+    Engine *gameEngine = new Engine();
+    Player *player = new Player();
 
-    Board *board = new Board(this->boardButtons);
+    this->engine = gameEngine;
+    this->engine->setInitialBoardState(board->getNumberOfTiles());
+    this->engine->addPlayer(player);
     this->board = board;
 
     // Logging number of cells to be removed
@@ -43,8 +49,9 @@ void MainWindow::on_pB_start_clicked()
 
 void MainWindow::createGridLayout(int n)
 {
-    ImageProcessor imageProccessor = ImageProcessor(this->currentImage, n);
     QSize buttonSize = QSize(ui->board->frameSize().width()/n,ui->board->frameSize().width()/n);
+    ImageProcessor tempImageProccessor = ImageProcessor(this->currentImage, n);
+
 
     this->boardButtons.resize(n, std::vector<QPushButton*>(n, nullptr));
 
@@ -52,7 +59,7 @@ void MainWindow::createGridLayout(int n)
     for (int row = 0; row < n; ++row) {
         for (int col = 0; col < n; ++col) {
             this->boardButtons[row][col] = new QPushButton();
-            QIcon icon = imageProccessor.getIcon(row, col);
+            QIcon icon = tempImageProccessor.getIcon(row, col);
             this->boardButtons[row][col]->setFixedSize(buttonSize);
             this->boardButtons[row][col]->setIconSize(buttonSize);
             this->boardButtons[row][col]->setIcon(icon);
@@ -96,10 +103,7 @@ void MainWindow::handleButtonClick(){
     if (clickedButton) {
         QGridLayout *layout = qobject_cast<QGridLayout*>(ui->board->layout());
         int clickedIndex = layout->indexOf(clickedButton);
-        Player player;
-        player.move(this->board, clickedIndex);
-        // DEBUG- REMOVE LATER !
-        // qDebug() << "Button clicked at idx: " << layout->indexOf(clickedButton);
+        engine->processMove(this->board, clickedIndex);
     }
 
 }
