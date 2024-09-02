@@ -14,13 +14,13 @@ void Engine::addPlayer(Player *player)
 
 void Engine::processMove(Board *board, int clickedIdx)
 {
-    if (!this->isMoveLegal(clickedIdx, board->getCurrentBlackButtonIdx(), boardSize)){
+    if (!this->isMoveLegal(clickedIdx, getEmptyTilePosition(), boardSize)){
         qDebug() << "Illegal move";
         return;
     };
 
-    std::swap(this->currentBoardState[clickedIdx], this->currentBoardState[board->getCurrentBlackButtonIdx()]);
-    this->player.move(board, clickedIdx);
+    std::swap(this->currentBoardState[clickedIdx], this->currentBoardState[getEmptyTilePosition()]);
+    // this->player.move(board, clickedIdx);
 
     if(this->checkWinCondition()){
         qDebug() << "Game won";
@@ -59,6 +59,7 @@ bool Engine::isMoveLegal(int clickedIndex, int currentEmptyTileIdx, int numberbO
 
 bool Engine::checkWinCondition() {
     for (int x =1; x < this->currentBoardState.size(); ++x){
+        if(currentBoardState[x] == -1){continue;};
         if(this->currentBoardState[x] - this->currentBoardState[x-1] != 1) {
             return false;
         };
@@ -97,7 +98,7 @@ void Engine::makePuzzleSolvable()
 
 void Engine::shuffle(Board *board, int n)
 { for (int i=0; i<n; i++)
-    {   int blackButtonIdx = board->getCurrentBlackButtonIdx();
+    {   int blackButtonIdx = getEmptyTilePosition();
         QVector<int> possibleIndecies{blackButtonIdx+1, blackButtonIdx-1, blackButtonIdx+boardSize,blackButtonIdx-boardSize};
         for (int x =0; x < possibleIndecies.size(); x++){
             if (possibleIndecies[x] > pow(boardSize,2)-1 || possibleIndecies[x]<0){
@@ -142,6 +143,11 @@ int Engine::getNumberInversions()
     qDebug() <<"Number of inversions:" << numberInversions;
 
     return numberInversions;
+}
+
+std::vector<int> Engine::getGameState()
+{
+    return this->currentBoardState;
 }
 
 bool Engine::isSlidePuzzeSolvable()

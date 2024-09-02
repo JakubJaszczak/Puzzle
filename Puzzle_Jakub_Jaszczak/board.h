@@ -23,6 +23,7 @@ public:
     void setBlackButton(int idx);
     void setCurrentBlackButtonIdx(int idx);
     void setBlackButton(int row, int col);
+    void setState(std::vector<int> boardState);
 
     ~Board();
 

@@ -17,6 +17,7 @@ public:
     void shuffle();
     bool isSlidePuzzeSolvable();
     int getNumberInversions();
+    std::vector<int> getGameState();
 
 
 private:

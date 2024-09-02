@@ -39,8 +39,9 @@ void MainWindow::on_pB_start_clicked()
 
     this->engine = gameEngine;
     this->engine->addPlayer(player);
-    // this->engine->shuffle(board, 50 * sb_value);
+    // this->engine->shuffle(board, 5 * sb_value);
     this->engine->shuffle();
+    board->setState(engine->getGameState());
     this->board = board;
 
     // Logging number of cells to be removed
@@ -114,6 +115,7 @@ void MainWindow::handleButtonClick(){
         QGridLayout *layout = qobject_cast<QGridLayout*>(ui->board->layout());
         int clickedIndex = layout->indexOf(clickedButton);
         engine->processMove(this->board, clickedIndex);
+        this->board->setState(this->engine->getGameState());
     }
 
 }

@@ -8,6 +8,7 @@ ImageProcessor::ImageProcessor(Images image, int _number_of_tiles) {
     QPixmap fullImage(this->imagesFilePaths[image]);
     this->_image = fullImage;
     this->setButtonSize(_number_of_tiles);
+    this->_number_of_tiles = _number_of_tiles;
 
     this->boardIcons.resize(_number_of_tiles);
     for (int row = 0; row<_number_of_tiles; ++row) {

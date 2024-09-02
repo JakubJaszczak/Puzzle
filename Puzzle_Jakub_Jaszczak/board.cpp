@@ -45,6 +45,17 @@ void Board::setBlackButton(int row, int col)
     blackButton->update();
 }
 
+void Board::setState(std::vector<int> boardState)
+{
+    for(int i=0; i<boardState.size(); i++){
+        if(boardState[i] == -1){
+            this->setBlackButton(i);
+            continue;
+        }
+        this->getButton(i)->setIcon(imageProcessor->getIcon(boardState[i]-1));
+    }
+}
+
 int Board::getCurrentBlackButtonIdx()
 {
     return this->currentBlackButtonIdx;
