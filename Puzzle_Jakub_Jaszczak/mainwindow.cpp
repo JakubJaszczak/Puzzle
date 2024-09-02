@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox->addItem(QString("Mario"));
     ui->comboBox->addItem(QString("Lena"));
     this->currentImage = Images::Mario;
+    createGridLayout(3);
 }
 
 void MainWindow::setManager(GameManager &manager)
@@ -29,9 +30,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_pB_start_clicked()
 {
     int sb_value = ui->sB_numberOfCells->value();
-
-    // this->mManager->setNumberOfCells(sb_value);
-    this->createGridLayout(sb_value);
+    delete_board_layout();
+    createGridLayout(sb_value);
     ImageProcessor *imageProccessor = new ImageProcessor(this->currentImage, sb_value);
     Board *board = new Board(this->boardButtons, imageProccessor);
     Engine *gameEngine = new Engine();
@@ -40,12 +40,16 @@ void MainWindow::on_pB_start_clicked()
     this->engine = gameEngine;
     this->engine->setInitialBoardState(board->getNumberOfTiles());
     this->engine->addPlayer(player);
-    this->engine->shuffle(board, 20);
+    // this->engine->shuffle(board, 50 * sb_value);
     this->board = board;
 
     // Logging number of cells to be removed
     QString s = QString::number(sb_value);
     ui->l_logger->setText(s);
+    ui->pB_start->setEnabled(false);
+    ui->sB_numberOfCells->setEnabled(false);
+    ui->comboBox->setEnabled(false);
+
 }
 
 void MainWindow::createGridLayout(int n)
@@ -53,11 +57,11 @@ void MainWindow::createGridLayout(int n)
     QSize buttonSize = QSize(ui->board->frameSize().width()/n,ui->board->frameSize().width()/n);
     ImageProcessor tempImageProccessor = ImageProcessor(this->currentImage, n);
 
-
-    this->boardButtons.resize(n, std::vector<QPushButton*>(n, nullptr));
+    this->boardButtons.resize(n);
 
     QGridLayout *layout = new QGridLayout;
     for (int row = 0; row < n; ++row) {
+        this->boardButtons[row].resize(n);
         for (int col = 0; col < n; ++col) {
             this->boardButtons[row][col] = new QPushButton();
             QIcon icon = tempImageProccessor.getIcon(row, col);
@@ -73,7 +77,7 @@ void MainWindow::createGridLayout(int n)
 
 void MainWindow::delete_board_layout(){
 
-    qDeleteAll(this->ui->board->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
+    qDeleteAll(this->ui->board->findChildren<QWidget *>(QString(), Qt::FindChildrenRecursively));
     QGridLayout *layout = qobject_cast<QGridLayout*>(ui->board->layout());
     delete layout;
 }
@@ -81,13 +85,17 @@ void MainWindow::delete_board_layout(){
 void MainWindow::on_pB_restart_clicked()
 {
     delete_board_layout();
+    ui->pB_start->setEnabled(true);
+    ui->sB_numberOfCells->setEnabled(true);
+    ui->comboBox->setEnabled(true);
+
 }
 
 
 void MainWindow::on_sB_numberOfCells_valueChanged(int arg1)
 {
-    // delete_board_layout();
-    // createGridLayout(arg1);
+    delete_board_layout();
+    createGridLayout(arg1);
 }
 
 
@@ -95,11 +103,12 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
     if (index == 0){this->currentImage = Images::Mario;};
     if (index == 1){this->currentImage = Images::Lena;};
+    delete_board_layout();
+    createGridLayout(ui->sB_numberOfCells->value());
 }
 
 
 void MainWindow::handleButtonClick(){
-
     QPushButton *clickedButton = qobject_cast<QPushButton*>(sender());
     if (clickedButton) {
         QGridLayout *layout = qobject_cast<QGridLayout*>(ui->board->layout());

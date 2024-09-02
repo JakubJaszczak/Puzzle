@@ -32,7 +32,6 @@ void Board::setBlackButton(int idx)
     blackButton->setAutoFillBackground(true);
     blackButton->setPalette(pal);
     blackButton->update();
-
 }
 
 void Board::setBlackButton(int row, int col)
@@ -44,7 +43,6 @@ void Board::setBlackButton(int row, int col)
     blackButton->setAutoFillBackground(true);
     blackButton->setPalette(pal);
     blackButton->update();
-
 }
 
 int Board::getCurrentBlackButtonIdx()
@@ -69,5 +67,4 @@ void Board::setCurrentBlackButtonIdx(int idx)
 
 Board::~Board()
 {
-
 }
