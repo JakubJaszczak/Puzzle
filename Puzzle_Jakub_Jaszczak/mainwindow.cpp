@@ -34,13 +34,13 @@ void MainWindow::on_pB_start_clicked()
     createGridLayout(sb_value);
     ImageProcessor *imageProccessor = new ImageProcessor(this->currentImage, sb_value);
     Board *board = new Board(this->boardButtons, imageProccessor);
-    Engine *gameEngine = new Engine();
+    Engine *gameEngine = new Engine(sb_value);
     Player *player = new Player();
 
     this->engine = gameEngine;
-    this->engine->setInitialBoardState(board->getNumberOfTiles());
     this->engine->addPlayer(player);
-    this->engine->shuffle(board, 50 * sb_value);
+    // this->engine->shuffle(board, 50 * sb_value);
+    this->engine->shuffle();
     this->board = board;
 
     // Logging number of cells to be removed

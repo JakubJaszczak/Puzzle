@@ -1,8 +1,11 @@
 #include "engine.h"
 
-#include <Qvector>
 
-Engine::Engine() {}
+
+Engine::Engine(int boardSize) {
+    this->boardSize = boardSize;
+    setInitialBoardState();
+}
 
 void Engine::addPlayer(Player *player)
 {
@@ -11,7 +14,7 @@ void Engine::addPlayer(Player *player)
 
 void Engine::processMove(Board *board, int clickedIdx)
 {
-    if (!this->isMoveLegal(clickedIdx, board->getCurrentBlackButtonIdx(), board->getNumberOfTiles())){
+    if (!this->isMoveLegal(clickedIdx, board->getCurrentBlackButtonIdx(), boardSize)){
         qDebug() << "Illegal move";
         return;
     };
@@ -24,11 +27,13 @@ void Engine::processMove(Board *board, int clickedIdx)
     };
 }
 
-void Engine::setInitialBoardState(int number_of_tiles)
+void Engine::setInitialBoardState()
 {
-    for (int i=0; i < (pow(number_of_tiles,2)); ++i){
+    for (int i=1; i < (pow(boardSize,2)); ++i){
         this->currentBoardState.push_back(i);
     }
+    this->currentBoardState.push_back(-1);
+    qDebug() << "Initial state" << currentBoardState;
 }
 
 bool Engine::isMoveLegal(int clickedIndex, int currentEmptyTileIdx, int numberbOfTilesPerAsix){
@@ -61,13 +66,41 @@ bool Engine::checkWinCondition() {
     return true;
 }
 
+int Engine::getEmptyTilePosition()
+{
+    for(int i=0; i<currentBoardState.size(); i++){
+        if(currentBoardState[i] == -1){
+            return i;
+        };
+    }
+
+    throw std::logic_error("Board does not have an empty tile");
+}
+
+int Engine::getRowNumberFromBelow()
+{
+    int emptyTileIdx = getEmptyTilePosition();
+    return boardSize - emptyTileIdx;
+}
+
+void Engine::makePuzzleSolvable()
+{   qDebug() <<"Before"<< isSlidePuzzeSolvable();
+    if(currentBoardState[0] != -1 && currentBoardState[1] != -1){
+        std::swap(currentBoardState[0], currentBoardState[1]);
+    }
+    else{
+        std::swap(currentBoardState[currentBoardState.size()-1], currentBoardState[currentBoardState.size()-2]);
+    }
+    qDebug() <<"After"<< isSlidePuzzeSolvable();
+
+}
+
 void Engine::shuffle(Board *board, int n)
 { for (int i=0; i<n; i++)
     {   int blackButtonIdx = board->getCurrentBlackButtonIdx();
-        int numberOfTiles = board->getNumberOfTiles();
-        QVector<int> possibleIndecies{blackButtonIdx+1, blackButtonIdx-1, blackButtonIdx+numberOfTiles,blackButtonIdx-numberOfTiles};
+        QVector<int> possibleIndecies{blackButtonIdx+1, blackButtonIdx-1, blackButtonIdx+boardSize,blackButtonIdx-boardSize};
         for (int x =0; x < possibleIndecies.size(); x++){
-            if (possibleIndecies[x] > pow(numberOfTiles,2)-1 || possibleIndecies[x]<0){
+            if (possibleIndecies[x] > pow(boardSize,2)-1 || possibleIndecies[x]<0){
                 possibleIndecies.removeAt(x);
             }
         }
@@ -76,4 +109,50 @@ void Engine::shuffle(Board *board, int n)
     }
 }
 
+void Engine::shuffle()
+{   srand(time(NULL));
+    for(int i=currentBoardState.size()-1; i>0; i--){
+        int randomIndex = rand() % i;
+        std::swap(this->currentBoardState[i], this->currentBoardState[randomIndex]);
+    }
+    qDebug() <<"After shuffle" << currentBoardState;
 
+    if(!isSlidePuzzeSolvable()){
+        makePuzzleSolvable();
+    };
+}
+
+int Engine::getNumberInversions()
+{
+    int emptyTile = -1;
+    int numberInversions = 0;
+
+    for (int i=0; i< currentBoardState.size(); ++i){
+        if(currentBoardState[i] == emptyTile){
+            continue;
+        }
+
+        for (int j = i+1; j< currentBoardState.size(); j++){
+            if(currentBoardState[j]!= emptyTile && currentBoardState[i] > currentBoardState[j])
+            {
+                numberInversions++;
+            }
+        }
+    }
+    qDebug() <<"Number of inversions:" << numberInversions;
+
+    return numberInversions;
+}
+
+bool Engine::isSlidePuzzeSolvable()
+{   int numberInverions = getNumberInversions();
+    if(boardSize % 2 == 0){
+        return (numberInverions % 2 == 0);
+    }
+    int emptyTileRowNumber = getEmptyTilePosition();
+    if (emptyTileRowNumber % 2 != 0){
+        return (numberInverions % 2 == 0);
+    }
+    else {
+        return (numberInverions % 2 != 0);}
+}
