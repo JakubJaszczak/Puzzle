@@ -14,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox->addItem(QString("Mario"));
     ui->comboBox->addItem(QString("Lena"));
     this->currentImage = Images::Mario;
-    createGridLayout(3);
+
+    createGridLayout(ui->sB_numberOfCells->value());
 }
 
 void MainWindow::setManager(GameManager &manager)
@@ -25,6 +26,7 @@ void MainWindow::setManager(GameManager &manager)
 MainWindow::~MainWindow()
 {
     delete board;
+    delete engine;
     delete ui;
 }
 
@@ -136,7 +138,7 @@ void MainWindow::on_savePB_clicked()
 
 void MainWindow::on_loadPB_clicked()
 {
-    std::vector<int> laodedState;
+    std::vector<int> loadedState;
     QString filename = "./save.txt";
     QFile file(filename);
     if (file.open(QIODevice::ReadOnly)) {
@@ -146,10 +148,17 @@ void MainWindow::on_loadPB_clicked()
             QString line = file.readLine();
             int singleTileState = line.toInt(&ok);
             if(!ok) {qDebug()<< "failed to load a number" << line;};
-            laodedState.push_back(singleTileState);
+            loadedState.push_back(singleTileState);
         }
     }
     file.close();
-    qDebug() << laodedState;
+
+    int boardSize = sqrt(loadedState.size());
+    delete_board_layout();
+    createGridLayout(boardSize);
+    this->board->setboard(this->boardButtons);
+    this->board->setImageProcessor(new ImageProcessor(this->currentImage, boardSize));
+    this->board->setState(loadedState);
+    this->engine->setNewState(loadedState);
 }
 

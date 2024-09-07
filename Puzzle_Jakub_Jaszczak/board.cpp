@@ -32,6 +32,7 @@ void Board::setBlackButton(int idx)
     blackButton->setAutoFillBackground(true);
     blackButton->setPalette(pal);
     blackButton->update();
+    this->currentBlackButtonIdx = idx;
 }
 
 void Board::setBlackButton(int row, int col)
@@ -56,6 +57,11 @@ void Board::setState(std::vector<int> boardState)
     }
 }
 
+void Board::setImageProcessor(ImageProcessor *newImgProc)
+{
+    this->imageProcessor = newImgProc;
+}
+
 int Board::getCurrentBlackButtonIdx()
 {
     return this->currentBlackButtonIdx;
@@ -71,6 +77,12 @@ ImageProcessor Board::getImageProcessor()
     return *this->imageProcessor;
 }
 
+void Board::setboard(std::vector<std::vector<QPushButton *> > newBoard)
+{
+    this->board = newBoard;
+    this->number_of_tiles = newBoard.size();
+}
+
 void Board::setCurrentBlackButtonIdx(int idx)
 {
     this->currentBlackButtonIdx = idx;
@@ -78,4 +90,5 @@ void Board::setCurrentBlackButtonIdx(int idx)
 
 Board::~Board()
 {
+    delete imageProcessor;
 }

@@ -150,6 +150,12 @@ std::vector<int> Engine::getGameState()
     return this->currentBoardState;
 }
 
+void Engine::setNewState(std::vector<int> state)
+{
+    this->currentBoardState = state;
+    this->boardSize = sqrt(state.size());
+}
+
 bool Engine::isSlidePuzzeSolvable()
 {   int numberInverions = getNumberInversions();
     if(boardSize % 2 == 0){
