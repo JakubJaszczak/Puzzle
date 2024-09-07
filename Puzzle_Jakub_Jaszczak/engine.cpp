@@ -7,6 +7,7 @@ Engine::Engine(int boardSize) {
     setInitialBoardState();
 }
 
+
 void Engine::addPlayer(Player *player)
 {
     this->player = *player;
@@ -35,6 +36,18 @@ void Engine::setInitialBoardState()
     this->currentBoardState.push_back(-1);
     qDebug() << "Initial state" << currentBoardState;
 }
+void Engine::reinitializeBoard(int size)
+{
+    this->currentBoardState.clear();
+
+    for (int i=1; i < (pow(size,2)); ++i){
+        this->currentBoardState.push_back(i);
+    }
+    this->currentBoardState.push_back(-1);
+    qDebug() << "Initial state" << currentBoardState;
+    this->boardSize = size;
+}
+
 
 bool Engine::isMoveLegal(int clickedIndex, int currentEmptyTileIdx, int numberbOfTilesPerAsix){
 
@@ -155,6 +168,7 @@ void Engine::setNewState(std::vector<int> state)
     this->currentBoardState = state;
     this->boardSize = sqrt(state.size());
 }
+
 
 bool Engine::isSlidePuzzeSolvable()
 {   int numberInverions = getNumberInversions();

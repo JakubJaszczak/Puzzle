@@ -15,7 +15,19 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox->addItem(QString("Lena"));
     this->currentImage = Images::Mario;
 
-    createGridLayout(ui->sB_numberOfCells->value());
+    int defaultBoardSize = ui->sB_numberOfCells->value();
+    delete_board_layout();
+    createGridLayout(defaultBoardSize);
+    ImageProcessor *imageProccessor = new ImageProcessor(this->currentImage, defaultBoardSize);
+    Board *board = new Board(this->boardButtons, imageProccessor);
+    Engine *gameEngine = new Engine(defaultBoardSize);
+    Player *player = new Player();
+
+    this->engine = gameEngine;
+    board->setState(engine->getGameState());
+    this->board = board;
+    this->engine->addPlayer(player);
+
 }
 
 void MainWindow::setManager(GameManager &manager)
@@ -27,25 +39,19 @@ MainWindow::~MainWindow()
 {
     delete board;
     delete engine;
+    delete mManager;
     delete ui;
 }
 
 void MainWindow::on_pB_start_clicked()
 {
-    int sb_value = ui->sB_numberOfCells->value();
-    delete_board_layout();
-    createGridLayout(sb_value);
-    ImageProcessor *imageProccessor = new ImageProcessor(this->currentImage, sb_value);
-    Board *board = new Board(this->boardButtons, imageProccessor);
-    Engine *gameEngine = new Engine(sb_value);
-    Player *player = new Player();
-
-    this->engine = gameEngine;
-    this->engine->addPlayer(player);
-    // this->engine->shuffle(board, 5 * sb_value);
+    int currentBoardSize = ui->sB_numberOfCells->value();
+    this->engine->reinitializeBoard(currentBoardSize);
+    // this->engine->shuffle(board, 5 * currentBoardSize);
     this->engine->shuffle();
-    board->setState(engine->getGameState());
-    this->board = board;
+    this->board->setboard(this->boardButtons);
+    this->board->setImageProcessor(new ImageProcessor(this->currentImage, currentBoardSize));
+    this->board->setState(engine->getGameState());
 
     ui->pB_start->setEnabled(false);
     ui->sB_numberOfCells->setEnabled(false);
@@ -86,6 +92,7 @@ void MainWindow::delete_board_layout(){
 void MainWindow::on_pB_restart_clicked()
 {
     delete_board_layout();
+    createGridLayout(ui->sB_numberOfCells->value());
     ui->pB_start->setEnabled(true);
     ui->sB_numberOfCells->setEnabled(true);
     ui->comboBox->setEnabled(true);
@@ -154,6 +161,7 @@ void MainWindow::on_loadPB_clicked()
     file.close();
 
     int boardSize = sqrt(loadedState.size());
+    ui->sB_numberOfCells->setValue(boardSize);
     delete_board_layout();
     createGridLayout(boardSize);
     this->board->setboard(this->boardButtons);

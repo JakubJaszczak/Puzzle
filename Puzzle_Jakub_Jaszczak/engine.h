@@ -19,6 +19,7 @@ public:
     int getNumberInversions();
     std::vector<int> getGameState();
     void setNewState(std::vector<int> state);
+    void reinitializeBoard(int size);
 
 
 private:
