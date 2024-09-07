@@ -17,10 +17,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>1100</x>
-      <y>30</y>
-      <width>160</width>
-      <height>421</height>
+      <x>1070</x>
+      <y>110</y>
+      <width>221</width>
+      <height>201</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -31,27 +31,31 @@
       <number>10</number>
      </property>
      <item>
-      <widget class="QLabel" name="numberOfCells_label">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>Number of cells: </string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSpinBox" name="sB_numberOfCells">
-       <property name="minimum">
-        <number>3</number>
-       </property>
-       <property name="maximum">
-        <number>9</number>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="numberOfCells_label">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Number of cells: </string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="sB_numberOfCells">
+         <property name="minimum">
+          <number>3</number>
+         </property>
+         <property name="maximum">
+          <number>9</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QPushButton" name="pB_start">
@@ -75,16 +79,16 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="l_logger_label">
+      <widget class="QPushButton" name="savePB">
        <property name="text">
-        <string>Logger:</string>
+        <string>PushButton</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="l_logger">
+      <widget class="QPushButton" name="loadPB">
        <property name="text">
-        <string/>
+        <string>PushButton</string>
        </property>
       </widget>
      </item>

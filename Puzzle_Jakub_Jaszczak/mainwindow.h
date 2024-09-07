@@ -36,6 +36,10 @@ private slots:
 
     void handleButtonClick();
 
+    void on_savePB_clicked();
+
+    void on_loadPB_clicked();
+
 private:
     Ui::MainWindow *ui;
     GameManager* mManager;

@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 #include "player.h"
 
+#include <QFile>
 #include <Qstring>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -44,9 +45,6 @@ void MainWindow::on_pB_start_clicked()
     board->setState(engine->getGameState());
     this->board = board;
 
-    // Logging number of cells to be removed
-    QString s = QString::number(sb_value);
-    ui->l_logger->setText(s);
     ui->pB_start->setEnabled(false);
     ui->sB_numberOfCells->setEnabled(false);
     ui->comboBox->setEnabled(false);
@@ -118,5 +116,40 @@ void MainWindow::handleButtonClick(){
         this->board->setState(this->engine->getGameState());
     }
 
+}
+
+void MainWindow::on_savePB_clicked()
+{
+    std::vector<int> gameState = this->engine->getGameState();
+    qDebug() << gameState;
+    QString filename = "./save.txt";
+    QFile file(filename);
+    if (file.open(QIODevice::WriteOnly)) {
+        QTextStream stream(&file);
+        for(const int x:gameState){
+            stream << x << "\n";
+        }
+    }
+    file.close();
+}
+
+
+void MainWindow::on_loadPB_clicked()
+{
+    std::vector<int> laodedState;
+    QString filename = "./save.txt";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadOnly)) {
+        QTextStream stream(&file);
+        while(!file.atEnd()){
+            bool ok;
+            QString line = file.readLine();
+            int singleTileState = line.toInt(&ok);
+            if(!ok) {qDebug()<< "failed to load a number" << line;};
+            laodedState.push_back(singleTileState);
+        }
+    }
+    file.close();
+    qDebug() << laodedState;
 }
 
