@@ -6,7 +6,7 @@
 #include <QString>
 #include <map>
 
-enum class Images {Lena,Mario,};
+enum class Images {Tiger,Mario,};
 
 class ImageProcessor
 {

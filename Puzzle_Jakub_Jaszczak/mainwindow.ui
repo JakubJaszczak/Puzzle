@@ -131,6 +131,9 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QComboBox" name="shuffleCB"/>
+     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="board" native="true">
