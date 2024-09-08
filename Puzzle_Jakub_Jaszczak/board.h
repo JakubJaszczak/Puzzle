@@ -12,17 +12,19 @@ class Board  : public QObject
 public:
     Board(std::vector<std::vector<QPushButton*>> buttonsArr, ImageProcessor *imageProcessor);
 
-    std::vector<std::vector<QPushButton*>> getBoard();
+    // std::vector<std::vector<QPushButton*>> getBoard();
     QPushButton* getButton(int idx);
     QPushButton* getButton(int row, int col);
-    int getCurrentBlackButtonIdx();
+    // int getCurrentBlackButtonIdx();
     int getNumberOfTiles();
     ImageProcessor getImageProcessor();
 
-    void setboard(std::vector<std::vector<QPushButton*>> baord);
+    void setboard(std::vector<std::vector<QPushButton*>> newBoard);
     void setBlackButton(int idx);
-    void setCurrentBlackButtonIdx(int idx);
+    // void setCurrentBlackButtonIdx(int idx);
     void setBlackButton(int row, int col);
+    void setState(std::vector<int> boardState);
+    void setImageProcessor(ImageProcessor *newImgProc);
 
     ~Board();
 
@@ -30,7 +32,7 @@ private:
     std::vector<std::vector<QPushButton*>> board;
     QSize buttonSize;
     int number_of_tiles;
-    int currentBlackButtonIdx;
+    // int currentBlackButtonIdx;
     ImageProcessor *imageProcessor;
 
 };

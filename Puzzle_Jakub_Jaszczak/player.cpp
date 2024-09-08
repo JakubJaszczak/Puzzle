@@ -2,22 +2,38 @@
 
 Player::Player() {}
 
-
-
-bool Player::gameWon()
-{   std:: list<std :: list <int>> iconIndecies;
-
-    return true;
-}
-
-void Player::move(Board* board, int clickedIndex)
+std::tuple<int, int> Player::getLastMove()
 {
-    QIcon clickedIcon = board->getButton(clickedIndex)->icon();
-    board->setBlackButton(clickedIndex);
-    board->getButton(board->getCurrentBlackButtonIdx())->setIcon(clickedIcon);
-    board->setCurrentBlackButtonIdx(clickedIndex);
-    this->moveCount++;
+    return this->lastMove;
 }
+
+void Player::move(int clickedIdx, int blackButtonIdx)
+{
+    moveCount++;
+    this->lastMove = {clickedIdx, blackButtonIdx};
+    this->allowUndo = true;
+}
+
+int Player::getMoveCount()
+{
+    return this->moveCount;
+}
+
+void Player::resetMoveCounter()
+{
+    this->moveCount = 0;
+}
+
+void Player::undoMove()
+{   if(allowUndo){
+        this->moveCount--;
+        this->allowUndo = false;
+    }
+}
+
+
+
+
 
 
 

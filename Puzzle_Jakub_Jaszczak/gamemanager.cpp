@@ -1,17 +1,25 @@
 #include "gamemanager.h"
 
 GameManager::GameManager() {
-
+    this->gameMsg = {
+        {GameStatus::Setup, "Setting up"},
+        {GameStatus::Gameplay, "The game is on"},
+        {GameStatus::Gameover, "You won, Congratulations!"},
+    };
+    this->currentGameStatus = GameStatus::Setup;
 }
 
-void GameManager::setNumberOfCells(int _n)
+const char* GameManager::getGameStatusMsg(GameStatus status)
 {
-    this->numberOfCells = _n;
+    return this->gameMsg[status];
 }
 
-int GameManager::getNumberOfCells() const
+void GameManager::setCurrentGameStatus(GameStatus status)
 {
-    return numberOfCells;
+    this->currentGameStatus = status;
 }
 
-
+GameStatus GameManager::getCurrentGameStatus()
+{
+    return this->currentGameStatus;
+}

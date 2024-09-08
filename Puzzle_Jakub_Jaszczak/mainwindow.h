@@ -22,7 +22,6 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void setManager(GameManager &manager);
     ~MainWindow();
 
 private slots:
@@ -35,6 +34,14 @@ private slots:
     void on_comboBox_currentIndexChanged(int index);
 
     void handleButtonClick();
+
+    void on_savePB_clicked();
+
+    void on_loadPB_clicked();
+
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_undo_clicked();
 
 private:
     Ui::MainWindow *ui;
