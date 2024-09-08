@@ -14,7 +14,9 @@ namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
-
+/*!
+ * \brief The MainWindow class is a view class, that controlls ui and passes user inputs from ui to other objects
+ */
 class MainWindow : public QMainWindow
 // Only supporting 1024x1024 images, formats: .png, /jpg
 {

@@ -6,7 +6,9 @@
 #include <Qvector>
 #include <Random>
 
-
+/*!
+ * \brief The Engine class is a main controller class, responsible for application logic and calculation. Opperates on 1D array representing button icons indecies.
+ */
 class Engine
 {
 public:

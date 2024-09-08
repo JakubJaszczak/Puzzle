@@ -2,7 +2,9 @@
 #define PLAYER_H
 
 #include <tuple>
-
+/*!
+ * \brief The Player class contains data about player moves. Counts number of moves of a player and stores last performed move/
+ */
 class Player
 {
 public:
