@@ -4,12 +4,17 @@
 
 #include <QFile>
 #include <Qstring>
+#include <Qstring>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    GameManager* manager = new GameManager();
+    this->mManager = manager;
+
 
     ui->comboBox->addItem(QString("Mario"));
     ui->comboBox->addItem(QString("Lena"));
@@ -20,20 +25,18 @@ MainWindow::MainWindow(QWidget *parent)
     createGridLayout(defaultBoardSize);
     ImageProcessor *imageProccessor = new ImageProcessor(this->currentImage, defaultBoardSize);
     Board *board = new Board(this->boardButtons, imageProccessor);
-    Engine *gameEngine = new Engine(defaultBoardSize);
+    Engine *gameEngine = new Engine(defaultBoardSize, mManager);
     Player *player = new Player();
 
     this->engine = gameEngine;
     board->setState(engine->getGameState());
     this->board = board;
     this->engine->addPlayer(player);
+    ui->lineEdit->setText(mManager->getGameStatusMsg(mManager->getCurrentGameStatus()));
 
 }
 
-void MainWindow::setManager(GameManager &manager)
-{
-    this->mManager = &manager;
-}
+
 
 MainWindow::~MainWindow()
 {
@@ -47,15 +50,22 @@ void MainWindow::on_pB_start_clicked()
 {
     int currentBoardSize = ui->sB_numberOfCells->value();
     this->engine->reinitializeBoard(currentBoardSize);
-    // this->engine->shuffle(board, 5 * currentBoardSize);
+    // this->engine->shuffle(5 * currentBoardSize);
     this->engine->shuffle();
     this->board->setboard(this->boardButtons);
     this->board->setImageProcessor(new ImageProcessor(this->currentImage, currentBoardSize));
     this->board->setState(engine->getGameState());
 
+
+    this->mManager->setCurrentGameStatus(GameStatus::Gameplay);
+
+
     ui->pB_start->setEnabled(false);
     ui->sB_numberOfCells->setEnabled(false);
     ui->comboBox->setEnabled(false);
+
+    ui->lineEdit->setText(this->mManager->getGameStatusMsg(mManager->getCurrentGameStatus()));
+
 
 }
 
@@ -97,6 +107,10 @@ void MainWindow::on_pB_restart_clicked()
     ui->sB_numberOfCells->setEnabled(true);
     ui->comboBox->setEnabled(true);
 
+    this->mManager->setCurrentGameStatus(GameStatus::Setup);
+    ui->lineEdit->setText(this->mManager->getGameStatusMsg(mManager->getCurrentGameStatus()));
+
+
 }
 
 
@@ -121,16 +135,17 @@ void MainWindow::handleButtonClick(){
     if (clickedButton) {
         QGridLayout *layout = qobject_cast<QGridLayout*>(ui->board->layout());
         int clickedIndex = layout->indexOf(clickedButton);
-        engine->processMove(this->board, clickedIndex);
+        engine->processMove(clickedIndex);
         this->board->setState(this->engine->getGameState());
     }
+    ui->lineEdit->setText(this->mManager->getGameStatusMsg(mManager->getCurrentGameStatus()));
 
+    ui->moveCounter->setText(QString::number(engine->getPlayerMoveCounter()));
 }
 
 void MainWindow::on_savePB_clicked()
 {
     std::vector<int> gameState = this->engine->getGameState();
-    qDebug() << gameState;
     QString filename = "./save.txt";
     QFile file(filename);
     if (file.open(QIODevice::WriteOnly)) {
@@ -141,7 +156,6 @@ void MainWindow::on_savePB_clicked()
     }
     file.close();
 }
-
 
 void MainWindow::on_loadPB_clicked()
 {
@@ -168,5 +182,43 @@ void MainWindow::on_loadPB_clicked()
     this->board->setImageProcessor(new ImageProcessor(this->currentImage, boardSize));
     this->board->setState(loadedState);
     this->engine->setNewState(loadedState);
+
+    this->mManager->setCurrentGameStatus(GameStatus::Gameplay);
+    ui->lineEdit->setText(this->mManager->getGameStatusMsg(mManager->getCurrentGameStatus()));
+}
+
+
+
+
+void MainWindow::on_lineEdit_textChanged(const QString &arg1){
+    if (arg1 == QString(mManager->getGameStatusMsg(GameStatus::Setup))){
+        ui->pB_start->setEnabled(true);
+        ui->sB_numberOfCells->setEnabled(true);
+        ui->comboBox->setEnabled(false);
+        ui->moveCounter->setText(QString::number(0));
+        this->engine->resetPlayerMoveCounter();
+    }
+    else if (arg1 == QString(mManager->getGameStatusMsg(GameStatus::Gameplay))){
+        ui->pB_start->setEnabled(false);
+        ui->sB_numberOfCells->setEnabled(false);
+        ui->comboBox->setEnabled(false);
+    }
+    else if (arg1 == QString(mManager->getGameStatusMsg(GameStatus::Gameover))){
+        ui->pB_start->setEnabled(true);
+        ui->sB_numberOfCells->setEnabled(true);
+        ui->comboBox->setEnabled(true);
+        ui->moveCounter->setText(QString::number(0));
+        this->engine->resetPlayerMoveCounter();
+        for(int i=0; i< engine->getGameState().size(); ++i){
+                this->board->getButton(i)->setEnabled(false);
+            }
+        }
+}
+
+void MainWindow::on_undo_clicked()
+{
+    this->engine->undoMove();
+    this->board->setState(this->engine->getGameState());
+    ui->moveCounter->setText(QString::number(engine->getPlayerMoveCounter()));
 }
 

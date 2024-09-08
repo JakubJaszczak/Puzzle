@@ -1,18 +1,28 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
+#include <QString>
+#include <map>
+
+enum class GameStatus {
+    Setup,
+    Gameplay,
+    Gameover,
+};
 
 class GameManager
 {
 public:
     GameManager();
-    void setNumberOfCells(int _n);
 
-    int getNumberOfCells() const;
+
+    const char* getGameStatusMsg(GameStatus status);
+    void setCurrentGameStatus(GameStatus status);
+    GameStatus getCurrentGameStatus();
 
 private:
-    int numberOfCells;
-
+    GameStatus currentGameStatus;
+    std::map<GameStatus, const char*> gameMsg;
 };
 
 #endif // GAMEMANAGER_H

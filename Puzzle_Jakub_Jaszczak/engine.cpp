@@ -1,30 +1,30 @@
 #include "engine.h"
+#include "gamemanager.h"
+#include <qdebug.h>
 
 
 
-Engine::Engine(int boardSize) {
+Engine::Engine(int boardSize, GameManager *manager) {
     this->boardSize = boardSize;
     setInitialBoardState();
+    this->manager = manager;
 }
-
 
 void Engine::addPlayer(Player *player)
 {
     this->player = *player;
 }
 
-void Engine::processMove(Board *board, int clickedIdx)
+void Engine::processMove(int clickedIdx)
 {
     if (!this->isMoveLegal(clickedIdx, getEmptyTilePosition(), boardSize)){
-        qDebug() << "Illegal move";
         return;
     };
 
+    this->player.move(clickedIdx, getEmptyTilePosition());
     std::swap(this->currentBoardState[clickedIdx], this->currentBoardState[getEmptyTilePosition()]);
-    // this->player.move(board, clickedIdx);
-
     if(this->checkWinCondition()){
-        qDebug() << "Game won";
+        manager->setCurrentGameStatus(GameStatus::Gameover);
     };
 }
 
@@ -34,7 +34,6 @@ void Engine::setInitialBoardState()
         this->currentBoardState.push_back(i);
     }
     this->currentBoardState.push_back(-1);
-    qDebug() << "Initial state" << currentBoardState;
 }
 void Engine::reinitializeBoard(int size)
 {
@@ -44,8 +43,29 @@ void Engine::reinitializeBoard(int size)
         this->currentBoardState.push_back(i);
     }
     this->currentBoardState.push_back(-1);
-    qDebug() << "Initial state" << currentBoardState;
     this->boardSize = size;
+}
+
+int Engine::getPlayerMoveCounter()
+{
+    return this->player.getMoveCount();
+}
+
+void Engine::resetPlayerMoveCounter()
+{
+    this->player.resetMoveCounter();
+}
+
+void Engine::undoMove()
+{
+    std::tuple<int, int> lastMove = this->player.getLastMove();
+    std::swap(this->currentBoardState[std::get<0>(lastMove)], this->currentBoardState[std::get<1>(lastMove)]);
+    this->player.undoMove();
+}
+
+Engine::~Engine()
+{
+    delete manager;
 }
 
 
@@ -54,17 +74,13 @@ bool Engine::isMoveLegal(int clickedIndex, int currentEmptyTileIdx, int numberbO
     qDebug() << "Button clicked at idx: " << clickedIndex << "  Current Black Button idx:"<< currentEmptyTileIdx ;
     bool legalMoveFlag = true;
     if (clickedIndex == currentEmptyTileIdx){
-        qDebug() << "clicked black button";
         legalMoveFlag = false;
     };
     if (!(abs(clickedIndex - currentEmptyTileIdx) == numberbOfTilesPerAsix || (abs(clickedIndex - currentEmptyTileIdx) == 1))){
-        qDebug() << "Buttons not in the same column or row";
         legalMoveFlag = false;
     };
-    // Check button on the edge
     if (abs(clickedIndex - currentEmptyTileIdx) == 1 && clickedIndex / numberbOfTilesPerAsix != currentEmptyTileIdx / numberbOfTilesPerAsix)
     {
-        qDebug() << "Black tile on the edge. Clicked tile in the next row";
         legalMoveFlag = false;
     }
     return legalMoveFlag;
@@ -98,18 +114,17 @@ int Engine::getRowNumberFromBelow()
 }
 
 void Engine::makePuzzleSolvable()
-{   qDebug() <<"Before"<< isSlidePuzzeSolvable();
+{
     if(currentBoardState[0] != -1 && currentBoardState[1] != -1){
         std::swap(currentBoardState[0], currentBoardState[1]);
     }
     else{
         std::swap(currentBoardState[currentBoardState.size()-1], currentBoardState[currentBoardState.size()-2]);
     }
-    qDebug() <<"After"<< isSlidePuzzeSolvable();
 
 }
 
-void Engine::shuffle(Board *board, int n)
+void Engine::shuffle(int n)
 { for (int i=0; i<n; i++)
     {   int blackButtonIdx = getEmptyTilePosition();
         QVector<int> possibleIndecies{blackButtonIdx+1, blackButtonIdx-1, blackButtonIdx+boardSize,blackButtonIdx-boardSize};
@@ -119,7 +134,7 @@ void Engine::shuffle(Board *board, int n)
             }
         }
         int clickedIndex = possibleIndecies[rand() % possibleIndecies.size()] ;
-        this->processMove(board,clickedIndex);
+        this->processMove(clickedIndex);
     }
 }
 
@@ -129,7 +144,6 @@ void Engine::shuffle()
         int randomIndex = rand() % i;
         std::swap(this->currentBoardState[i], this->currentBoardState[randomIndex]);
     }
-    qDebug() <<"After shuffle" << currentBoardState;
 
     if(!isSlidePuzzeSolvable()){
         makePuzzleSolvable();
@@ -153,8 +167,6 @@ int Engine::getNumberInversions()
             }
         }
     }
-    qDebug() <<"Number of inversions:" << numberInversions;
-
     return numberInversions;
 }
 
