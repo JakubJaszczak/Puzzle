@@ -5,9 +5,14 @@
 #include "qpixmap.h"
 #include <QString>
 #include <map>
-
+/*!
+ * \brief The Images enum defines possible images that will be displayed on the board.
+ */
 enum class Images {Tiger,Mario,};
 
+/*!
+ * \brief The ImageProcessor class is a Board helper class that processes board image, creating icons for each button.
+ */
 class ImageProcessor
 {
 public:

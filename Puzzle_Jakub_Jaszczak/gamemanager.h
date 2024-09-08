@@ -3,13 +3,18 @@
 
 #include <QString>
 #include <map>
-
+/*!
+ * \brief The GameStatus enum defines possible game statuses.
+ */
 enum class GameStatus {
     Setup,
     Gameplay,
     Gameover,
 };
 
+/*!
+ * \brief The GameManager class stores data about current game status and messages for each game state.
+ */
 class GameManager
 {
 public:

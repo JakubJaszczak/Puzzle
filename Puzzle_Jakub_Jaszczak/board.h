@@ -5,6 +5,10 @@
 #include "imageprocessor.h"
 
 #include <qpushbutton.h>
+
+/*!
+ * \brief The Board class is a class responsible for board view, updating icons of buttons according to state from engine.
+ */
 class Board  : public QObject
 {
     Q_OBJECT
