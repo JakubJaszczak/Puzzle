@@ -43,6 +43,8 @@ private slots:
 
     void on_undo_clicked();
 
+    void on_shuffleCB_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     GameManager* mManager;
@@ -52,5 +54,6 @@ private:
     Images currentImage;
     void createGridLayout(int n);
     void delete_board_layout();
+    int shuffleAlgorithm;
 };
 #endif // MAINWINDOW_H
